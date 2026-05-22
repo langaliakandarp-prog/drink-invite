@@ -1,12 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>My Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow:hidden;
+font-family:Arial;
+}
+
+.card{
+background:rgba(255,255,255,0.2);
+padding:30px;
+border-radius:20px;
+text-align:center;
+backdrop-filter:blur(10px);
+width:90%;
+max-width:350px;
+position:absolute;
+transition:0.3s;
+}
+
+h2{
+color:white;
+}
+
+button{
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#yes{
+background:white;
+color:#ff4081;
+}
+
+#no{
+background:#ff4d6d;
+color:white;
+}
+
+.popup{
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,0.6);
+}
+
+.popup div{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+}
+
+.heart{
+position:absolute;
+color:white;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+</style>
 </head>
 
 <body>
 
-<h1>Hello ❤️</h1>
+<div class="card" id="card">
+<h2>Will you join me for a drink? 🍷</h2>
+
+<button id="yes">Yes ❤️</button>
+<button id="no">No 😅</button>
+</div>
+
+<div class="popup" id="popup">
+<div>
+<h2>Thank you for being in my life ❤️</h2>
+</div>
+</div>
+
+<script>
+
+// hearts
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=Math.random()*20+10+"px";
+h.style.animationDuration=Math.random()*5+5+"s";
+document.body.appendChild(h);
+}
+
+// move card on NO
+const card=document.getElementById("card");
+document.getElementById("no").addEventListener("mouseover",()=>{
+card.style.top=Math.random()*80+"vh";
+card.style.left=Math.random()*80+"vw";
+});
+
+// YES action
+document.getElementById("yes").addEventListener("click",()=>{
+document.getElementById("popup").style.display="flex";
+
+confetti({
+particleCount: 200,
+spread: 100,
+origin: { y: 0.6 }
+});
+});
+
+</script>
 
 </body>
 </html>
